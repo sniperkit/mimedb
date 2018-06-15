@@ -63,7 +63,7 @@ type mimeEntry struct {
 
 // DB - Mime is a collection of mime types with extension as key and content-type as value.
 var DB = map[string]mimeEntry{
-{{range $extension, $entry := . }}	"{{$extension}}": {
+{{range $extension, $entry := .Entries }}	"{{$extension}}": {
 		ContentType:  "{{$entry.ContentType}}",
 		Compressible: {{$entry.Compressible}},
 	},
@@ -146,15 +146,15 @@ func main() {
 		panic(err)
 	}
 
-	mimeTmpl.Execute(os.Stdout, struct {
+	err = mimeTmpl.Execute(os.Stdout, struct {
 		CopyrightYear int
 		CreatedAt     string
+		Entries       mimeDB
 	}{
+		Entries:       mDB,
 		CopyrightYear: time.Now().Year(),
 		CreatedAt:     time.Now().Format("Mon Jan _2 15:04:05 2006"),
 	})
-
-	err = mimeTmpl.Execute(os.Stdout, mDB)
 	if err != nil {
 		panic(err)
 	}

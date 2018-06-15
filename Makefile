@@ -22,3 +22,5 @@ clean:
 	@rm -fR ./bin/*
 	@rm -f ./shared/data/db.json
 	@rm -rf ./shared/data
+
+dev: gen-db example
