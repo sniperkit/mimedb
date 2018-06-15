@@ -3,7 +3,7 @@ package autoload
 import (
 	"mime"
 
-	"github.com/GitbookIO/mimedb"
+	mimedb "github.com/sniperkit/mimedb/pkg"
 )
 
 func init() {
